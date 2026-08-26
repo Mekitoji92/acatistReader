@@ -1,0 +1,564 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rânduiala acatistelor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@400;500;700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&display=swap">
+
+<style>
+:root{
+  --ground:#F0EEF3;
+  --surface:#FBFAFC;
+  --ink:#231F2B;
+  --ink-soft:#4A4356;
+  --muted:#7A7288;
+  --rule:#DEDAE6;
+  --gold:#8A6D2A;
+  --dana:#7B3A4A;
+  --dana-ink:#FBF6F7;
+  --alex:#31465C;
+  --alex-ink:#F4F7FA;
+  --shadow:0 1px 2px rgba(35,31,43,.06), 0 8px 24px -12px rgba(35,31,43,.18);
+  --scale:1;
+  --serif:"Gentium Book Plus", Cambria, "Palatino Linotype", Georgia, serif;
+  --caps:"Alegreya SC", "Gentium Book Plus", Georgia, serif;
+  --ui:ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141219;
+    --surface:#1C1922;
+    --ink:#E9E4EE;
+    --ink-soft:#C3BCCE;
+    --muted:#948CA3;
+    --rule:#332E3D;
+    --gold:#C6A155;
+    --dana:#7A3948;
+    --dana-ink:#FBF1F3;
+    --alex:#2F4256;
+    --alex-ink:#EFF4F8;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141219;
+  --surface:#1C1922;
+  --ink:#E9E4EE;
+  --ink-soft:#C3BCCE;
+  --muted:#948CA3;
+  --rule:#332E3D;
+  --gold:#C6A155;
+  --dana:#7A3948;
+  --dana-ink:#FBF1F3;
+  --alex:#2F4256;
+  --alex-ink:#EFF4F8;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:calc(clamp(1.05rem, .96rem + .68vw, 1.3rem) * var(--scale));
+  line-height:1.58;
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:break-word;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* ---------- acasă ---------- */
+#home{
+  min-height:100dvh;
+  display:flex;flex-direction:column;
+  gap:clamp(1.2rem,3.5vh,2.2rem);
+  padding:max(1.4rem,env(safe-area-inset-top)) 1.2rem max(1.4rem,env(safe-area-inset-bottom));
+  max-width:60rem;margin:0 auto;
+  justify-content:center;
+}
+.datebar{text-align:center;display:flex;flex-direction:column;gap:.15rem}
+.datebar .zi{
+  font-family:var(--caps);font-weight:500;
+  font-size:1.5em;letter-spacing:.02em;line-height:1.15;
+}
+.datebar .sub{font-family:var(--ui);font-size:.72em;color:var(--muted);letter-spacing:.02em}
+.datebar .rota{
+  font-family:var(--caps);font-size:.7em;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-top:.35rem;
+}
+
+.cards{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media (min-width:44rem){.cards{grid-template-columns:1fr 1fr;gap:1.1rem}}
+
+.card{
+  display:flex;flex-direction:column;gap:.5rem;
+  text-align:left;
+  padding:clamp(1.1rem,3.2vh,1.7rem) clamp(1.1rem,3vw,1.6rem);
+  border-radius:14px;color:var(--dana-ink);
+  min-height:clamp(7.5rem,20vh,11rem);
+  justify-content:space-between;
+  box-shadow:var(--shadow);
+  transition:transform .16s ease, filter .16s ease;
+}
+.card:active{transform:scale(.985);filter:brightness(1.06)}
+.card--dana{background:var(--dana)}
+.card--alex{background:var(--alex);color:var(--alex-ink)}
+.card .nume{
+  font-family:var(--caps);font-weight:700;
+  font-size:1.7em;line-height:1;letter-spacing:.03em;
+}
+.card .cand{
+  font-family:var(--ui);font-size:.66em;letter-spacing:.16em;text-transform:uppercase;
+  opacity:.72;
+}
+.card .titlu{font-size:.92em;line-height:1.35;opacity:.94;text-wrap:balance}
+
+.zile{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.zile button{
+  font-family:var(--caps);font-size:.78em;letter-spacing:.06em;
+  padding:.45rem 1rem;border-radius:999px;
+  color:var(--muted);border:1px solid var(--rule);
+}
+.zile button[aria-pressed="true"]{color:var(--surface);background:var(--ink-soft);border-color:var(--ink-soft)}
+
+.prefs{
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  font-family:var(--ui);font-size:.68em;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.prefs button{
+  border:1px solid var(--rule);border-radius:8px;
+  width:2.4rem;height:2.1rem;line-height:1;
+  font-family:var(--serif);color:var(--ink-soft);
+  display:grid;place-items:center;
+}
+.sursa{font-family:var(--ui);font-size:.62em;color:var(--muted);text-align:center;letter-spacing:.02em}
+.sursa a{color:inherit}
+
+/* ---------- citire ---------- */
+#reader{display:none;height:100dvh;flex-direction:column}
+#reader.on{display:flex}
+#home.off{display:none}
+
+#scroll{
+  flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:max(.9rem,env(safe-area-inset-top)) 1.15rem 1rem;
+}
+.sheet{max-width:37rem;margin:0 auto;position:relative}
+
+.topline{
+  display:flex;align-items:baseline;gap:.7rem;justify-content:space-between;
+  font-family:var(--ui);font-size:.66em;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:clamp(1.1rem,3.5vh,1.9rem);
+}
+.topline button{color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+.topline .cine{text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.pg{animation:in .2s ease both}
+.meas{
+  position:absolute;left:0;right:0;top:0;
+  visibility:hidden;pointer-events:none;animation:none;
+}
+@keyframes in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.pg{animation:none}.card{transition:none}}
+
+.h{
+  font-family:var(--caps);font-weight:500;
+  font-size:1.02em;line-height:1.25;letter-spacing:.06em;
+  text-align:center;text-wrap:balance;
+  color:var(--gold);
+  margin:1.75em 0 .7em;
+}
+p.t{margin:0 0 1.05em}
+.verse{margin:0 0 1.05em}
+.verse .ln{display:block;padding-left:1.35em;text-indent:-1.35em}
+.verse .ln.lead{padding-left:0;text-indent:0;margin-bottom:.12em}
+.verse .ln.refren{margin-top:.12em;color:var(--gold);font-style:italic}
+.rubric{
+  font-style:italic;text-align:center;color:var(--muted);
+  font-size:.88em;margin:1.4em 0 1.05em;
+}
+.first{margin-top:0}
+.pg > :last-child{margin-bottom:0}
+.end{
+  margin-top:2rem;padding-top:1rem;border-top:1px solid var(--rule);
+  font-family:var(--ui);font-size:.64em;letter-spacing:.04em;color:var(--muted);text-align:center;
+}
+.end a{color:inherit}
+
+/* bara de jos */
+#bar{
+  display:grid;grid-template-columns:1fr 5.2rem 1fr;
+  gap:.5rem;align-items:stretch;
+  padding:.5rem .6rem calc(.5rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--rule);
+  background:var(--surface);
+}
+#bar button{
+  border-radius:12px;background:var(--ground);
+  display:grid;place-items:center;
+  min-height:clamp(3.2rem,8.5vh,4.4rem);
+  color:var(--ink-soft);
+  border:1px solid var(--rule);
+  transition:transform .12s ease, background .12s ease;
+}
+#bar button:active{transform:scale(.97);background:var(--rule)}
+#bar button[disabled]{opacity:.3;pointer-events:none}
+#bar button span{font-size:1.9em;line-height:1;display:block}
+#count{
+  display:grid;place-items:center;text-align:center;
+  font-family:var(--ui);font-size:.7em;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;
+}
+@media (min-width:44rem){
+  #bar{grid-template-columns:1fr 7rem 1fr;padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom))}
+  #bar button span{font-size:2.2em}
+}
+</style>
+
+<main id="home"></main>
+
+<section id="reader" aria-label="Citire">
+  <div id="scroll">
+    <div class="sheet" id="sheet">
+      <div class="topline" id="topline"></div>
+      <div class="pg" id="pg"></div>
+    </div>
+  </div>
+  <nav id="bar">
+    <button id="prev" aria-label="Pagina anterioară"><span>‹</span></button>
+    <div id="count"></div>
+    <button id="next" aria-label="Pagina următoare"><span>›</span></button>
+  </nav>
+</section>
+
+<script>
+const ACATISTE = __DATA__;
+
+/* Rugăciunile începătoare */
+const INCEPUT = [
+ {h:"Rugăciunile începătoare", p:[
+  "De este preot, zice: Binecuvântat este Dumnezeul nostru totdeauna, acum și pururea și în vecii vecilor. Amin, iar de este diacon, monah sau mirean, zice: Pentru rugăciunile Sfinților Părinților noștri, Doamne Iisuse Hristoase, Fiul lui Dumnezeu, miluiește-ne pe noi.",
+  "Slavă Ție, Dumnezeul nostru, slavă Ție!",
+  "Împărate ceresc, Mângâietorule, Duhul adevărului, Care pretutindenea ești și pe toate le împlinești; Vistierul bunătăților și Dătătorule de viață, vino și Te sălășluiește întru noi și ne curățește pe noi de toată întinăciunea și mântuiește, Bunule, sufletele noastre.",
+  "Sfinte Dumnezeule, Sfinte tare, Sfinte fără de moarte, miluiește-ne pe noi (de trei ori).",
+  "Slavă Tatălui și Fiului și Sfântului Duh. Și acum și pururea și în vecii vecilor. Amin.",
+  "Preasfântă Treime, miluiește-ne pe noi. Doamne, curățește păcatele noastre. Stăpâne, iartă fărădelegile noastre. Sfinte, cercetează și vindecă neputințele noastre, pentru numele Tău.",
+  "Doamne, miluiește (de trei ori), Slavă Tatălui și Fiului și Sfântului Duh. Și acum și pururea și în vecii vecilor. Amin.",
+  "Tatăl nostru, Care ești în ceruri, sfințească-se numele Tău, vie împărăția Ta, facă-se voia Ta, precum în cer, așa și pe pământ. Pâinea noastră cea de toate zilele dă-ne-o nouă astăzi, și ne iartă nouă greșelile noastre, precum și noi iertăm greșiților noștri. Și nu ne duce pe noi în ispită, ci ne izbăvește de cel rău.",
+  "Preotul: Că a Ta este împărăția, puterea și slava, a Tatălui și a Fiului și a Sfântului Duh, acum și pururea și în vecii vecilor."
+ ], r:[]}
+];
+
+/* Rânduiala: o săptămână de bază, următoarea schimbată.
+   Ancoră: luni 24 august 2026 = săptămână de bază. */
+const ANCORA = Date.UTC(2026, 7, 24);
+const RANDUIALA = {
+  1: ["mihail-gavriil", "ioachim-ana"],
+  3: ["ioan-rusul",     "stelian"],
+  5: ["buna-vestire",   "efrem"]
+};
+const PERSOANE = {
+  alex: {nume:"Alexandru", clasa:"card--alex", serie:0},
+  dana: {nume:"Daniela",   clasa:"card--dana", serie:1}
+};
+const ZILE = ["duminică","luni","marți","miercuri","joi","vineri","sâmbătă"];
+const ZILE_MARI = ["Duminică","Luni","Marți","Miercuri","Joi","Vineri","Sâmbătă"];
+const LUNI = ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie",
+              "august","septembrie","octombrie","noiembrie","decembrie"];
+
+const gasesteAcatist = s => ACATISTE.find(a => a.slug === s);
+const cheieZi = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+
+function luniaSaptamanii(d){
+  const zi = (d.getDay() + 6) % 7;
+  return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate() - zi);
+}
+function schimbat(d){
+  const n = Math.round((luniaSaptamanii(d) - ANCORA) / 604800000);
+  return ((n % 2) + 2) % 2 === 1;
+}
+function dataZilei(zi, azi){
+  const delta = (zi - azi.getDay() + 7) % 7;
+  return new Date(azi.getFullYear(), azi.getMonth(), azi.getDate() + delta);
+}
+function acatistPentru(persoana, data){
+  const pereche = RANDUIALA[data.getDay()];
+  if (!pereche) return null;
+  const s = PERSOANE[persoana].serie;
+  return gasesteAcatist(pereche[schimbat(data) ? 1 - s : s]);
+}
+
+const ls = {
+  get(k, def){ try { const v = localStorage.getItem(k); return v === null ? def : v; } catch(e){ return def; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+};
+let scala = parseFloat(ls.get("scala", "1")) || 1;
+const aplicaScala = () => document.documentElement.style.setProperty("--scale", scala.toFixed(2));
+aplicaScala();
+
+function el(tag, cls, text){
+  const n = document.createElement(tag || "div");
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+/* ---------------- acasă ---------------- */
+const azi = new Date();
+let ziAleasa = RANDUIALA[azi.getDay()]
+  ? azi.getDay()
+  : [1,3,5].map(z => ({z, d:(z - azi.getDay() + 7) % 7})).sort((a,b) => a.d - b.d)[0].z;
+
+const home = document.getElementById("home");
+
+function randeazaAcasa(){
+  const data = dataZilei(ziAleasa, azi);
+  const eAzi = data.toDateString() === azi.toDateString();
+  home.innerHTML = "";
+
+  const bar = el("div","datebar");
+  bar.append(
+    el("div","zi", ZILE_MARI[data.getDay()]),
+    el("div","sub", (eAzi ? "astăzi, " : "") + data.getDate() + " " + LUNI[data.getMonth()] + " " + data.getFullYear()),
+    el("div","rota", schimbat(data) ? "săptămâna cu ordinea schimbată" : "săptămâna cu ordinea de bază")
+  );
+  home.append(bar);
+
+  const carduri = el("div","cards");
+  for (const cheie of ["dana","alex"]) {
+    const p = PERSOANE[cheie], a = acatistPentru(cheie, data);
+    const b = el("button", "card " + p.clasa);
+    b.append(
+      el("div","cand", eAzi ? "citește astăzi" : ZILE[data.getDay()]),
+      el("div","nume", p.nume),
+      el("div","titlu", a ? a.title : "—")
+    );
+    b.onclick = () => deschide(cheie, a, data);
+    carduri.append(b);
+  }
+  home.append(carduri);
+
+  const zile = el("div","zile");
+  for (const z of [1,3,5]) {
+    const b = el("button", "", ZILE_MARI[z]);
+    b.setAttribute("aria-pressed", String(z === ziAleasa));
+    b.onclick = () => { ziAleasa = z; randeazaAcasa(); };
+    zile.append(b);
+  }
+  home.append(zile);
+
+  const prefs = el("div","prefs");
+  const minus = el("button","","A−"); minus.setAttribute("aria-label","Text mai mic");
+  const plus  = el("button","","A+"); plus.setAttribute("aria-label","Text mai mare");
+  minus.onclick = () => setScala(-0.08);
+  plus.onclick  = () => setScala(+0.08);
+  prefs.append(minus, el("span","","mărimea textului"), plus);
+  home.append(prefs, el("div","sursa","Texte după doxologia.ro"));
+}
+function setScala(d){
+  scala = Math.min(1.5, Math.max(0.8, scala + d));
+  aplicaScala(); ls.set("scala", scala.toFixed(2));
+}
+
+/* ---------------- citire ---------------- */
+const reader  = document.getElementById("reader");
+const sheet   = document.getElementById("sheet");
+const scroll  = document.getElementById("scroll");
+const topline = document.getElementById("topline");
+const pgEl    = document.getElementById("pg");
+const count   = document.getElementById("count");
+const bPrev   = document.getElementById("prev");
+const bNext   = document.getElementById("next");
+
+let itemi = [], pagini = [], i = 0, cheiePozitie = "", blocare = null;
+
+/* textul devine un șir continuu de bucăți; paginile se taie după cât încape pe ecran */
+function bucati(acatist){
+  const surse = INCEPUT.concat(acatist.sections);
+  const out = [];
+  let b = 0;
+  for (const s of surse) {
+    if (s.h) out.push({k:"h", t:s.h, b:b++});
+    for (const t of s.p) {
+      const bloc = b++;
+      if (t.indexOf("\n") >= 0) {
+        const linii = t.split("\n").filter(Boolean);
+        linii.forEach((l, ix) => {
+          const ultim = ix === linii.length - 1;
+          for (const f of (ix === 0 ? fraze(l) : [l])) out.push({k:"l", t:f, b:bloc, ix, ultim});
+        });
+      } else {
+        for (const f of fraze(t)) out.push({k:"p", t:f, b:bloc});
+      }
+    }
+    for (const r of (s.r || [])) out.push({k:"r", t:r, b:b++});
+  }
+  return out;
+}
+/* Taie paragraful în bucăți mici, la capăt de frază sau la punct și virgulă.
+   Bucățile ajunse pe aceeași pagină se lipesc la loc, deci textul arată neschimbat;
+   rostul lor e doar ca pagina să se poată umple până jos. */
+function fraze(t){
+  const out = [];
+  for (const f of taie(t, /[.!?;:]\s+/g, 100, 40, true)) {
+    if (f.length > 170) out.push.apply(out, taie(f, /,\s+/g, 170, 55, false));
+    else out.push(f);
+  }
+  return out;
+}
+function taie(t, re, prag, minim, capat){
+  if (t.length <= prag) return [t];
+  const out = [];
+  let start = 0, m;
+  re.lastIndex = 0;
+  while ((m = re.exec(t))) {
+    if (capat && ".!?".indexOf(m[0][0]) >= 0 && !/[A-ZĂÂÎȘȚ„]/.test(t.charAt(m.index + m[0].length))) continue;
+    if (m.index + 1 - start < minim) continue;
+    out.push(t.slice(start, m.index + 1));
+    start = m.index + m[0].length;
+  }
+  const rest = t.slice(start);
+  if (rest.trim()) out.push(rest);
+  return out.length ? out : [t];
+}
+
+function randeaza(cont, de, pana){
+  cont.textContent = "";
+  let k = de;
+  while (k < pana) {
+    const it = itemi[k];
+    if (it.k === "h")      { cont.append(el("h2","h", it.t)); k++; }
+    else if (it.k === "r") { cont.append(el("div","rubric", it.t)); k++; }
+    else if (it.k === "p") {
+      const bloc = it.b, parti = [];
+      while (k < pana && itemi[k].k === "p" && itemi[k].b === bloc) { parti.push(itemi[k].t); k++; }
+      cont.append(el("p","t", parti.join(" ")));
+    }
+    else {
+      const bloc = it.b, v = el("div","verse");
+      while (k < pana && itemi[k].k === "l" && itemi[k].b === bloc) {
+        const ix = itemi[k].ix, parti = [];
+        let ultim = false;
+        while (k < pana && itemi[k].k === "l" && itemi[k].b === bloc && itemi[k].ix === ix) {
+          parti.push(itemi[k].t); ultim = itemi[k].ultim; k++;
+        }
+        const n = el("span","ln", parti.join(" "));
+        if (ix === 0) n.classList.add("lead");
+        if (ultim && /^bucur[ăa]-te/i.test(parti[0])) n.classList.add("refren");
+        v.append(n);
+      }
+      cont.append(v);
+    }
+  }
+  if (cont.firstElementChild) cont.firstElementChild.classList.add("first");
+}
+
+function inaltimeDisponibila(){
+  const cs = getComputedStyle(scroll);
+  const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+  const cap = topline.offsetHeight + parseFloat(getComputedStyle(topline).marginBottom);
+  return scroll.clientHeight - pad - cap - 4;
+}
+
+function pagineaza(){
+  const masura = el("div","pg meas");
+  sheet.append(masura);
+  const spatiu = inaltimeDisponibila();
+  pagini = [];
+  let start = 0;
+  while (start < itemi.length) {
+    let sfarsit = start;
+    while (sfarsit < itemi.length) {
+      randeaza(masura, start, sfarsit + 1);
+      if (masura.scrollHeight > spatiu && sfarsit > start) break;
+      sfarsit++;
+      if (masura.scrollHeight > spatiu) break;   // o singură bucată mai înaltă decât ecranul
+    }
+    while (sfarsit - start > 1 && itemi[sfarsit - 1].k === "h") sfarsit--;  // fără titlu orfan jos
+    pagini.push([start, sfarsit]);
+    start = sfarsit;
+  }
+  masura.remove();
+}
+
+function paginaCu(item){
+  for (let n = 0; n < pagini.length; n++) if (item < pagini[n][1]) return n;
+  return Math.max(0, pagini.length - 1);
+}
+
+function deschide(persoana, acatist, data){
+  if (!acatist) return;
+  itemi = bucati(acatist);
+  cheiePozitie = "poz:" + persoana + ":" + acatist.slug + ":" + cheieZi(data);
+  const ancora = Math.min(itemi.length - 1, Math.max(0, parseInt(ls.get(cheiePozitie, "0"), 10) || 0));
+  topline.textContent = "";
+  const inapoi = el("button","","‹ Acasă");
+  inapoi.onclick = acasa;
+  topline.append(inapoi, el("div","cine", PERSOANE[persoana].nume + " · " + acatist.short));
+  home.classList.add("off");
+  reader.classList.add("on");
+  pagineaza();
+  i = paginaCu(ancora);
+  arata();
+  tineEcranulAprins();
+  if (document.fonts && document.fonts.status !== "loaded") document.fonts.ready.then(repagineaza);
+}
+function acasa(){
+  reader.classList.remove("on");
+  home.classList.remove("off");
+  if (blocare) { blocare.release().catch(()=>{}); blocare = null; }
+  randeazaAcasa();
+}
+function arata(){
+  randeaza(pgEl, pagini[i][0], pagini[i][1]);
+  pgEl.style.animation = "none"; void pgEl.offsetWidth; pgEl.style.animation = "";
+  count.textContent = (i + 1) + " / " + pagini.length;
+  bPrev.disabled = i === 0;
+  bNext.disabled = i === pagini.length - 1;
+  scroll.scrollTop = 0;
+  ls.set(cheiePozitie, String(pagini[i][0]));
+}
+function repagineaza(){
+  if (!reader.classList.contains("on") || !itemi.length) return;
+  const ancora = pagini.length ? pagini[i][0] : 0;
+  pagineaza();
+  i = paginaCu(ancora);
+  arata();
+}
+function du(d){
+  const n = i + d;
+  if (n < 0 || n >= pagini.length) return;
+  i = n; arata();
+}
+bPrev.onclick = () => du(-1);
+bNext.onclick = () => du(+1);
+
+addEventListener("keydown", e => {
+  if (!reader.classList.contains("on")) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); du(+1); }
+  if (e.key === "ArrowLeft"  || e.key === "PageUp") { e.preventDefault(); du(-1); }
+  if (e.key === "Escape") acasa();
+});
+
+let tx = 0, ty = 0;
+scroll.addEventListener("touchstart", e => { tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; }, {passive:true});
+scroll.addEventListener("touchend", e => {
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.8) du(dx < 0 ? +1 : -1);
+}, {passive:true});
+
+let ceas = null;
+addEventListener("resize", () => { clearTimeout(ceas); ceas = setTimeout(repagineaza, 180); });
+if (window.visualViewport) visualViewport.addEventListener("resize", () => { clearTimeout(ceas); ceas = setTimeout(repagineaza, 180); });
+
+async function tineEcranulAprins(){
+  try { if ("wakeLock" in navigator) blocare = await navigator.wakeLock.request("screen"); } catch(e){}
+}
+addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && reader.classList.contains("on") && !blocare) tineEcranulAprins();
+});
+
+randeazaAcasa();
+</script>
