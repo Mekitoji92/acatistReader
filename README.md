@@ -17,7 +17,7 @@ apoi tot așa. Ancora este **luni, 24 august 2026** = săptămână de bază.
 | Miercuri | Sf. Ioan Rusul               | Sf. Stelian         |
 | Vineri   | Buna Vestire                 | Sf. Efrem cel Nou   |
 
-În săptămâna de bază Alexandru citește seria întâi și Daniela seria a doua; în săptămâna
+În săptămâna de bază Daniela citește seria întâi și Alexandru seria a doua; în săptămâna
 următoare invers. Dacă ziua curentă nu e zi de acatist, pagina arată următoarea zi de citit,
 iar rândul *Luni · Miercuri · Vineri* lasă alegerea manuală.
 
